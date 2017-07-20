@@ -1,0 +1,14 @@
+diff --git a/dver.d b/dver.d
+index ffc6af1..b9db344 100644
+--- a/dver.d
++++ b/dver.d
+@@ -19,7 +19,7 @@ import ae.sys.file;
+ version (Windows)
+ 	enum BASE = `C:\Downloads\!dmd\`;
+ else
+-	enum BASE = `/home/vladimir/data/software/dmd/`;
++	enum BASE = `/dlang/downloads/`;
+ 
+ int dver(
+ 	Switch!("Download versions if not present", 'd') download,
+

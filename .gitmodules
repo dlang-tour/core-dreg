@@ -1,0 +1,6 @@
+[submodule "misc"]
+	path = misc
+	url = https://github.com/CyberShadow/misc
+[submodule "ae"]
+	path = ae
+	url = https://github.com/CyberShadow/ae

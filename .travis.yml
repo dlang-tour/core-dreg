@@ -1,0 +1,13 @@
+sudo: required
+language: d
+
+services:
+  - docker
+
+script:
+  - make all
+  - docker build -t dlangtour/core-dreg:latest .
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push dlangtour/core-dreg:latest

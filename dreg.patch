@@ -1,0 +1,22 @@
+diff --git a/dreg.d b/dreg.d
+index 1ec0aac..3cadbde 100644
+--- a/dreg.d
++++ b/dreg.d
+@@ -27,7 +27,7 @@ import std.string;
+ import ae.utils.meta;
+ import ae.utils.time.format;
+ 
+-enum dmdDir = "/home/vladimir/data/software/dmd";
++enum dmdDir = "/dlang/downloads";
+ enum canBisectAfter = Date(2011, 07, 01);
+ 
+ void main(string[] args)
+@@ -92,7 +92,7 @@ void main(string[] args)
+ 		synchronized
+ 		{
+ 			results[ver] = result;
+-			writef!"%d/%d\r"(results.length, versions.length); stdout.flush();
++			//writef!"%d/%d\r"(results.length, versions.length); stdout.flush();
+ 		}
+ 	}
+ 

@@ -14,8 +14,8 @@ to support online compilation of user code in a safe sandbox.
 
 Run the docker container passing the base64 source as command line parameter:
 
-    > bsource=$(echo 'void main() { import std.conv; std.stdio; writefln("Hello World, %s", 42.to!int); }' | base64 -w0)
-	> docker run --rm dlangtour/core-exec:dmd-nightly $bsource
+	> bsource=$(echo 'void main() { import std.conv; std.stdio; writefln("Hello World, %s", 42.to!int); }' | base64 -w0)
+	> docker run --rm dlangtour/core-dreg $bsource
 
 ```
 Up to      2.062  : Failure with output:

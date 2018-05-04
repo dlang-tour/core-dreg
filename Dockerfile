@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 	&& for ver in \
 		#2.051 2.052 2.053 2.054 2.055 2.056 2.057 2.058 2.059 \
 		2.060 2.061 2.062 2.063 2.064 2.065.0 2.066.0 2.067.1 2.068.2 2.069.2 \
-		2.070.2 2.071.2 2.072.2 2.073.2 2.074.1 2.075.1 2.076.1 2.077.1 2.078.1 2.079.0 \
+		2.070.2 2.071.2 2.072.2 2.073.2 2.074.1 2.075.1 2.076.1 2.077.1 2.078.1 2.079.0 2.080.0 \
 	; do /dlang/dver -d $ver echo downloaded $ver ; done \
 	&& find /dlang -name "*.zip" | xargs rm -rf \
  	&& find /dlang \( -type d -and \! -type l -and -path "*/bin32" -or -path "*/lib32" -or -path "*/html" \) | xargs rm -rf \

@@ -1,6 +1,6 @@
 # Docker container for running old versions of D
 
-[![Build Status](https://travis-ci.org/dlang-tour/core-dreg.svg?branch=master)](https://travis-ci.org/dlang-tour/core-dreg)
+[![master](https://github.com/dlang-tour/core-dreg/actions/workflows/default.yml/badge.svg)](https://github.com/dlang-tour/core-dreg/actions/workflows/default.yml)
 
 This docker image provides the old versions of the [D](https://dlang.org) compiler.
 The container takes source code encoded as **Base64** on the command line and

@@ -13,7 +13,7 @@ args=${args:-${@:2}}
 compiler="dmd"
 
 if [[ $args =~ .*-c.* ]] ; then
-    exec timeout -s KILL ${TIMEOUT:-30} dreg "${compiler}" $args onlineapp.d | tail -n100
+    exec timeout -s KILL ${TIMEOUT:-60} dreg "${compiler}" $args onlineapp.d | tail -n100
 elif [ -z ${2:-""} ] ; then
-    exec timeout -s KILL ${TIMEOUT:-30} dreg "${compiler}" $args -g -run onlineapp.d | tail -n10000
+    exec timeout -s KILL ${TIMEOUT:-60} dreg "${compiler}" $args -g -run onlineapp.d | tail -n10000
 fi

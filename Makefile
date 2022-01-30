@@ -1,5 +1,13 @@
 all: bin/dver bin/dreg
 
+TAG=core-dreg:local
+
+docker-image:
+	docker build -t $(TAG) .
+
+test: docker-image
+	./test.sh $(TAG)
+
 misc/.patched:
 	cd misc && patch dreg.d < ../dreg.patch
 	cd misc && patch dver.d < ../dver.patch

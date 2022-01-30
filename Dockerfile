@@ -25,6 +25,7 @@ RUN apt-get install --no-install-recommends -y \
 
 COPY ae /work/build/ae
 COPY misc /work/build/misc
+COPY har /work/build/har
 COPY Makefile *.patch /work/build/
 
 RUN . /work/ldc*/activate \
@@ -32,6 +33,7 @@ RUN . /work/ldc*/activate \
  && mkdir -p /dlang \
  && cp /work/build/bin/dver /dlang/dver \
  && cp /work/build/bin/dreg /dlang/dreg \
+ && cp /work/build/bin/har /dlang/har \
 # If required by further steps
 #  && mv /work/ldc* /ldc \
 #  && chmod a=+rx /ldc \

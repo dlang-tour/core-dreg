@@ -1,4 +1,4 @@
-all: bin/dver bin/dreg
+all: bin/dver bin/dreg bin/har
 
 TAG=core-dreg:local
 
@@ -24,6 +24,9 @@ bin/dreg: misc/dreg.d misc/.patched
 
 bin/list_tags: list_tags.d
 	rdmd --build-only -of$@ $<
+
+bin/har: har/harmain.d
+	rdmd --build-only -of=$@ -Ihar/src $(EXTRA_DFLAGS) $<
 
 clean:
 	rm -rf bin

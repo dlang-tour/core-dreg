@@ -4,3 +4,6 @@
 [submodule "ae"]
 	path = ae
 	url = https://github.com/CyberShadow/ae
+[submodule "har"]
+	path = har
+	url = https://github.com/marler8997/har

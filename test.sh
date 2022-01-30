@@ -28,3 +28,33 @@ DOCKER_FLAGS="-c" docker run -e DOCKER_FLAGS --rm $dockerId $bsource | grep -zq 
 source='void main() { import std.stdio; }'
 bsource=$(echo $source | base64 -w0)
 [ $(docker run --rm $dockerId $bsource | wc -l) -eq 1 ]
+
+# Multiple files passed via HAR
+bsource=$(base64 -w0 <<EOF
+--- main.d
+
+import lib;
+
+void main()
+{
+    foo();
+}
+
+--- lib.d
+
+import std.stdio;
+
+static immutable string greeting = import("data.txt");
+
+void foo()
+{
+    writeln(greeting);
+}
+
+--- data.txt
+Hello, World!
+EOF
+)
+
+DOCKER_FLAGS="-J."    docker run -e DOCKER_FLAGS --rm $dockerId $bsource | grep -zq "Hello, World!"
+DOCKER_FLAGS="-J. -c" docker run -e DOCKER_FLAGS --rm $dockerId $bsource

@@ -22,16 +22,6 @@ jobs:
         with:
           submodules: true
 
-      # Fetch host compiler
-      - name: Install host LDC
-        uses: dlang-community/setup-dlang@v1
-        with:
-          compiler: ldc-latest
-
-      # Run make to build dreg and dver which are used in the Dockerfile
-      - name: Build dreg and dver
-        run: make all
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 

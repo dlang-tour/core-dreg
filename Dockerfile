@@ -1,4 +1,6 @@
-FROM ubuntu:16.04
+# Base image providing the basic dependencies
+# extended by the builder and final image
+FROM ubuntu:16.04 as base
 
 MAINTAINER "Sebastian Wilzbach <seb@wilzba.ch>"
 
@@ -7,8 +9,13 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 	ca-certificates \
 	curl \
 	gcc \
+	libc-dev
+
+# Temporary environment to build the tools
+FROM base as builder
+
+RUN apt-get install --no-install-recommends -y \
 	gnupg \
-	libc-dev \
 	libxml2 \
 	make \
 	patch \
@@ -28,12 +35,14 @@ RUN . /work/ldc*/activate \
 # If required by further steps
 #  && mv /work/ldc* /ldc \
 #  && chmod a=+rx /ldc \
- && rm -rf /work \
- && apt-get remove -y \
-	make \
-	patch
+ && rm -rf /work
+
+# Final image providing the collection of different compiler versions
+FROM base as final
 
 # ENV PATH=/ldc/bin:${PATH}
+
+COPY --from=builder /dlang /dlang
 
 RUN for ver in \
 		#2.051 2.052 2.053 2.054 2.055 2.056 2.057 2.058 2.059 \

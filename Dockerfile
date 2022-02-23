@@ -51,15 +51,17 @@ RUN for ver in \
 		2.080.1 2.081.2 2.082.1 2.083.1 2.084.1 2.085.1 2.086.1 2.087.1 2.088.1 2.089.1 \
 		2.090.1 2.091.1 2.092.1 2.093.1 2.094.1 2.095.1 2.096.1 2.097.0 \
 	; do /dlang/dver -d $ver echo downloaded $ver ; done \
-	&& find /dlang -name "*.zip" | xargs rm -rf \
- 	&& find /dlang \( -type d -and \! -type l -and -path "*/bin32" -or -path "*/lib32" -or -path "*/html" \) | xargs rm -rf \
-	&& find /dlang -name "dustmite" | xargs rm -rf \
-	&& find /dlang -name "obj2asm" | xargs rm -rf \
-	&& find /dlang -name "dub" | xargs rm -rf \
-	&& find /dlang -name "dman" | xargs rm -rf \
-	&& find /dlang -name "rdmd" | xargs rm -rf \
-	&& find /dlang -name "ddemangle" | xargs rm -rf \
-	&& find /dlang -name "dumpobj" | xargs rm -rf \
+	&& find '/home/vladimir/data/software/dmd' \
+		-name "*.zip" \
+		-or \( -type d -and \! -type l -and -path "*/bin32" -or -path "*/lib32" -or -path "*/html" \) \
+		-or -name "dustmite" \
+		-or -name "obj2asm" \
+		-or -name "dub" \
+		-or -name "dman" \
+		-or -name "rdmd" \
+		-or -name "ddemangle" \
+		-or -name "dumpobj" \
+		-delete \
 	&& apt-get auto-remove -y curl ca-certificates aria2
 
 ENV PATH=/dlang:${PATH}

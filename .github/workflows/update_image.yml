@@ -5,7 +5,10 @@
 name: update_image
 
 on:
-  # Run once peer week, i.e. every sunday
+  # Enable option to manually run the action:
+  workflow_dispatch:
+
+  # Run once peer week, i.e. every Sunday:
   schedule:
     - cron: 0 0 * * 0
 

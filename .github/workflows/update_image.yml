@@ -1,0 +1,52 @@
+# Action to update the Docker image for new releases
+#
+# Run every sunday to detect new releases based on the tags in the
+# DMD repository. Creates a new PR to udpdate the VERSIONS.txt file
+name: update_image
+
+on:
+  # Run once peer week, i.e. every sunday
+  schedule:
+    - cron: 0 0 * * 0
+
+jobs:
+  main:
+    name: Check for new releases
+    if: github.repository == 'dlang-tour/core-dreg'
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Fetch the host compiler to build the update script
+      - name: Install host LDC
+        uses: dlang-community/setup-dlang@v1
+        with:
+          compiler: ldc-latest
+
+      # Fetch sources to build the update script
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      # Update the VERSION file and check whether a new image must be built
+      - name: Update version file
+        id: update
+        run: |
+          set -euox pipefail
+
+          make versions
+
+          VERSION="$(tail -n1 VERSIONS.txt)"
+          echo "::set-output name=last_revision::$VERSION"
+
+      # Raise a PR for the updated VERSIONS.txt
+      # The action will do nothing if VERSIONS.txt wasn't changed by the previous step
+      # See https://github.com/marketplace/actions/create-pull-request
+      - name: Create PR for updated versions file
+        uses: peter-evans/create-pull-request@v3.12.1
+        with:
+          add-paths: VERSIONS.txt
+          branch: update-${{ steps.update.outputs.last_revision }}
+          commit-message: Update VERSIONS.txt to ${{ steps.update.outputs.last_revision }}
+          title: Update VERSIONS.txt to ${{ steps.update.outputs.last_revision }}
+          body: Automatically created by Github Actions using [this workflow](.github/workflows/update_image.yml).
+          delete-branch: true

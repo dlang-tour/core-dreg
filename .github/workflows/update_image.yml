@@ -28,7 +28,7 @@ jobs:
 
       # Fetch sources to build the update script
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Update the VERSION file and check whether a new image must be built
       - name: Update version file

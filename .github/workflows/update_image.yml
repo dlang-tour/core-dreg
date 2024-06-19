@@ -45,7 +45,7 @@ jobs:
       # The action will do nothing if VERSIONS.txt wasn't changed by the previous step
       # See https://github.com/marketplace/actions/create-pull-request
       - name: Create PR for updated versions file
-        uses: peter-evans/create-pull-request@v6.0.5
+        uses: peter-evans/create-pull-request@v6.1.0
         with:
           add-paths: VERSIONS.txt
           branch: update-${{ steps.update.outputs.last_revision }}
